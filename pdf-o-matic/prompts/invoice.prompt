@@ -1,0 +1,20 @@
+---
+model: googleai/gemini-2.0-flash
+input:
+  schema:
+    pdfUrl: string
+  default:
+    pdfUrl: "https://storage.googleapis.com/generativeai-downloads/data/pdf_structured_outputs/invoice.pdf"
+output:
+  schema:
+    invoiceNumber: string
+    date: string
+    totalGrossWorth: integer
+    items(array):
+      description: string
+      quantity: integer
+      grossWorth: integer
+---
+Extract the structured data from the following PDF file.
+
+{{media url=pdfUrl}}

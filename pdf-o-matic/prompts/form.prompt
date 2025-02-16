@@ -1,0 +1,21 @@
+---
+model: googleai/gemini-2.0-flash
+input:
+  schema:
+    pdfUrl: string
+  default:
+    pdfUrl: "https://storage.googleapis.com/generativeai-downloads/data/pdf_structured_outputs/handwriting_form.pdf"
+output:
+  schema:
+    formNumber: string, Handwritten Form Number
+    startDate: string, Effective Date of the plan
+    beginningOfYear: integer, The plan liabilities beginning of the year
+    endOfYear: integer, The plan liabilities end of the year
+    name: string, Name of the plan
+    address: string, Mailing address
+    phoneNumber: string, Employer's phone number
+    ein: string, Employer Identification Number
+---
+Extract the hand-written form data.
+
+{{media url=pdfUrl}}
