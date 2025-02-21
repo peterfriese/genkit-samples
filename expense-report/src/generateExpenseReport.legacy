@@ -1,0 +1,28 @@
+export const generateExpenseReport = ai.defineFlow(
+	{
+		name: 'generateExpenseReport1',
+		inputSchema: z.array(z.object({ file: z.string() })),
+	},
+	async (input) => {
+		const expenses = await Promise.all(input.map(item => extractExpenses(item)));
+
+		const output = await ai.generate({
+			prompt: [
+				{
+					text:
+						`Generate a report of the expenses from the following input.
+            Make sure to normalise the currency to EUR.
+            Use ISO date format.
+            Include the total amount of expenses in EUR.
+
+            Return the report in Markdown format, with a table of the expenses.
+            ${JSON.stringify(expenses)}`
+				},
+			],
+			tools: [getCurrencyConversionRate]
+		});
+		if (!output) {
+			throw new Error('No output');
+		}
+		return output.text;
+	});

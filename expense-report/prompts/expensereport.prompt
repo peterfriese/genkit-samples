@@ -1,0 +1,24 @@
+---
+model: googleai/gemini-2.0-flash
+tools: [getCurrencyConversionRate]
+input:
+  schema:
+    expenses: string
+---
+Generate a report of the expenses from the following input.
+Make sure to normalise the currency to EUR.
+Use ISO date format.
+Include the total amount of expenses in EUR.
+
+Return the report in Markdown format, with a table of the expenses.
+Use the following columns:
+- Date
+- Category
+- Vendor
+- Description
+- Amount (original currency)
+- Original currency
+- Amount (EUR)
+- In the table footer, show the respective total amounts
+
+{{expenses}}
